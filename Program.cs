@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using PUMB_Test.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<PUMB_TestContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("PUMB_TestContext") ?? throw new InvalidOperationException("Connection string 'PUMB_TestContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
